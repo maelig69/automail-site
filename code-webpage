@@ -1,1 +1,603 @@
+import React, { useState } from 'react';
+import { Mail, Clock, Brain, Target, CheckCircle, Users, Building, GraduationCap, ArrowRight, Star, Menu, X } from 'lucide-react';
 
+const LandingPage = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Fonctions pour rendre les boutons interactifs
+  const handleStartTrial = () => {
+    // Redirection vers ta page d'inscription
+    window.location.href = '/signup';
+    // Ou ouvre un modal
+    // setShowSignupModal(true);
+  };
+
+  const handleLogin = () => {
+    // Redirection vers ta page de connexion
+    window.location.href = '/login';
+  };
+
+  const handleDemo = () => {
+    // Ouvre une vidéo de démonstration
+    window.open('https://youtu.be/demo-video', '_blank');
+    // Ou scroll vers une section demo
+    // document.getElementById('demo-section')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handlePricingClick = (planName: string) => {
+    // Redirection vers le checkout avec le plan sélectionné
+    window.location.href = `/checkout?plan=${planName.toLowerCase()}`;
+    // Ou ouvre le modal de paiement
+    console.log(`Plan sélectionné: ${planName}`);
+  };
+
+  const handleContact = () => {
+    // Ouvre le formulaire de contact
+    window.location.href = '/contact';
+    // Ou ouvre un modal
+    // setShowContactModal(true);
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const features = [
+    {
+      icon: <Brain className="w-8 h-8 text-blue-600" />,
+      title: "IA Intelligente",
+      description: "Trie et classe automatiquement vos emails selon leur importance et urgence"
+    },
+    {
+      icon: <Clock className="w-8 h-8 text-green-600" />,
+      title: "Réponses Automatiques",
+      description: "Génère et envoie des réponses personnalisées basées sur le contexte"
+    },
+    {
+      icon: <Target className="w-8 h-8 text-purple-600" />,
+      title: "Relances Intelligentes",
+      description: "Suit automatiquement vos emails importants avec des relances personnalisées"
+    },
+    {
+      icon: <CheckCircle className="w-8 h-8 text-orange-600" />,
+      title: "Règles Personnalisées",
+      description: "Créez vos propres règles de tri et d'automatisation en quelques clics"
+    }
+  ];
+
+  const useCases = [
+    {
+      icon: <Building className="w-12 h-12 text-blue-600" />,
+      title: "Entreprises",
+      description: "Gérez les emails clients, support et internes efficacement",
+      benefits: ["Service client 24/7", "Gestion des prospects", "Suivi automatique"]
+    },
+    {
+      icon: <GraduationCap className="w-12 h-12 text-green-600" />,
+      title: "Universités",
+      description: "Automatisez la communication étudiante et administrative",
+      benefits: ["Réponses aux étudiants", "Gestion des candidatures", "Communications administratives"]
+    },
+    {
+      icon: <Users className="w-12 h-12 text-purple-600" />,
+      title: "Particuliers",
+      description: "Reprenez le contrôle de votre boîte mail personnelle",
+      benefits: ["Tri automatique", "Réponses rapides", "Moins de stress"]
+    }
+  ];
+
+  const steps = [
+    {
+      number: "01",
+      title: "Connectez votre boîte mail",
+      description: "Intégration sécurisée avec Gmail, Outlook et autres fournisseurs"
+    },
+    {
+      number: "02",
+      title: "Configurez vos règles",
+      description: "Définissez vos préférences et laissez l'IA apprendre de vos habitudes"
+    },
+    {
+      number: "03",
+      title: "Profitez du temps gagné",
+      description: "Votre boîte mail fonctionne en pilote automatique, intelligemment"
+    }
+  ];
+
+  const plans = [
+    {
+      name: "Starter",
+      price: "29€",
+      period: "/mois",
+      description: "Parfait pour débuter",
+      features: [
+        "1 boîte mail",
+        "500 emails/mois",
+        "Règles de base",
+        "Support email"
+      ],
+      popular: false
+    },
+    {
+      name: "Pro",
+      price: "79€",
+      period: "/mois",
+      description: "Pour les professionnels",
+      features: [
+        "3 boîtes mail",
+        "5 000 emails/mois",
+        "IA avancée",
+        "Intégrations",
+        "Support prioritaire"
+      ],
+      popular: true
+    },
+    {
+      name: "Université",
+      price: "199€",
+      period: "/mois",
+      description: "Solution éducative",
+      features: [
+        "Boîtes illimitées",
+        "50 000 emails/mois",
+        "Tableau de bord admin",
+        "Formation incluse",
+        "Support dédié"
+      ],
+      popular: false
+    },
+    {
+      name: "Sur-mesure",
+      price: "Sur devis",
+      period: "",
+      description: "Solution entreprise",
+      features: [
+        "Configuration personnalisée",
+        "Volume illimité",
+        "API dédiée",
+        "SLA garanti",
+        "Account manager"
+      ],
+      popular: false
+    }
+  ];
+
+  const testimonials = [
+    {
+      name: "Marie Dubois",
+      role: "Directrice Marketing",
+      company: "TechCorp",
+      content: "Nous avons gagné 15h par semaine en automatisant nos réponses client. Incroyable !",
+      rating: 5
+    },
+    {
+      name: "Prof. Jean Martin",
+      role: "Responsable IT",
+      company: "Université Paris-Tech",
+      content: "La gestion des emails étudiants n'a jamais été aussi simple. Révolutionnaire.",
+      rating: 5
+    },
+    {
+      name: "Thomas Petit",
+      role: "Consultant",
+      company: "Freelance",
+      content: "Ma boîte mail est enfin organisée. Je me concentre sur l'essentiel.",
+      rating: 5
+    }
+  ];
+
+  const faqs = [
+    {
+      question: "Comment fonctionne la sécurité ?",
+      answer: "Nous utilisons un chiffrement de bout en bout et ne stockons jamais vos emails. Seules les métadonnées nécessaires sont analysées."
+    },
+    {
+      question: "Puis-je annuler à tout moment ?",
+      answer: "Oui, vous pouvez annuler votre abonnement à tout moment sans frais. Vos données restent accessibles 30 jours après l'annulation."
+    },
+    {
+      question: "Quels fournisseurs d'email sont supportés ?",
+      answer: "Gmail, Outlook, Yahoo, et tous les fournisseurs supportant IMAP/SMTP. Nous ajoutons régulièrement de nouveaux fournisseurs."
+    },
+    {
+      question: "Y a-t-il une période d'essai ?",
+      answer: "Oui, tous nos plans incluent 14 jours d'essai gratuit sans engagement ni carte bancaire requise."
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Header */}
+      <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <div className="flex items-center space-x-2">
+              <Mail className="w-8 h-8 text-blue-600" />
+              <span className="text-2xl font-bold text-gray-900">MailBot</span>
+            </div>
+            
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex space-x-8">
+              <a 
+                href="#features" 
+                onClick={(e) => { e.preventDefault(); scrollToSection('features'); }}
+                className="text-gray-600 hover:text-blue-600 transition-colors"
+              >
+                Fonctionnalités
+              </a>
+              <a 
+                href="#pricing" 
+                onClick={(e) => { e.preventDefault(); scrollToSection('pricing'); }}
+                className="text-gray-600 hover:text-blue-600 transition-colors"
+              >
+                Tarifs
+              </a>
+              <a 
+                href="#faq" 
+                onClick={(e) => { e.preventDefault(); scrollToSection('faq'); }}
+                className="text-gray-600 hover:text-blue-600 transition-colors"
+              >
+                FAQ
+              </a>
+            </nav>
+
+            {/* Desktop CTA */}
+            <div className="hidden md:flex items-center space-x-4">
+              <button 
+                onClick={handleLogin}
+                className="text-gray-600 hover:text-blue-600 transition-colors"
+              >
+                Se connecter
+              </button>
+              <button 
+                onClick={handleStartTrial}
+                className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Essai gratuit
+              </button>
+            </div>
+
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2"
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-white border-t border-gray-200">
+            <div className="px-4 py-2 space-y-2">
+              <a 
+                href="#features" 
+                onClick={(e) => { e.preventDefault(); scrollToSection('features'); setMobileMenuOpen(false); }}
+                className="block py-2 text-gray-600"
+              >
+                Fonctionnalités
+              </a>
+              <a 
+                href="#pricing" 
+                onClick={(e) => { e.preventDefault(); scrollToSection('pricing'); setMobileMenuOpen(false); }}
+                className="block py-2 text-gray-600"
+              >
+                Tarifs
+              </a>
+              <a 
+                href="#faq" 
+                onClick={(e) => { e.preventDefault(); scrollToSection('faq'); setMobileMenuOpen(false); }}
+                className="block py-2 text-gray-600"
+              >
+                FAQ
+              </a>
+              <button 
+                onClick={handleLogin}
+                className="w-full text-left py-2 text-gray-600"
+              >
+                Se connecter
+              </button>
+              <button 
+                onClick={handleStartTrial}
+                className="w-full bg-blue-600 text-white py-2 rounded-lg mt-2"
+              >
+                Essai gratuit
+              </button>
+            </div>
+          </div>
+        )}
+      </header>
+
+      {/* Hero Section */}
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+              Gagnez <span className="text-blue-600">5h/semaine</span><br />
+              grâce à une boîte mail intelligente
+            </h1>
+            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+              Notre IA trie, répond et relance automatiquement vos emails selon vos règles personnalisées. 
+              Concentrez-vous sur l'essentiel.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button 
+                onClick={handleStartTrial}
+                className="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors"
+              >
+                Commencer gratuitement
+              </button>
+              <button 
+                onClick={handleDemo}
+                className="border border-gray-300 text-gray-700 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors"
+              >
+                Voir la démonstration
+              </button>
+            </div>
+            <p className="text-sm text-gray-500 mt-4">14 jours d'essai gratuit • Aucune carte bancaire requise</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section id="features" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Fonctionnalités intelligentes
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Notre plateforme combine intelligence artificielle et automatisation pour révolutionner votre gestion d'emails
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature, index) => (
+              <div key={index} className="text-center p-6 rounded-lg hover:bg-gray-50 transition-colors">
+                <div className="flex justify-center mb-4">
+                  {feature.icon}
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">{feature.title}</h3>
+                <p className="text-gray-600">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Use Cases Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Adapté à tous vos besoins
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Que vous soyez une entreprise, une université ou un particulier, notre solution s'adapte à vos besoins
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {useCases.map((useCase, index) => (
+              <div key={index} className="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex justify-center mb-6">
+                  {useCase.icon}
+                </div>
+                <h3 className="text-2xl font-semibold text-gray-900 mb-4">{useCase.title}</h3>
+                <p className="text-gray-600 mb-6">{useCase.description}</p>
+                <ul className="space-y-2">
+                  {useCase.benefits.map((benefit, i) => (
+                    <li key={i} className="flex items-center text-gray-700">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
+                      {benefit}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How it Works Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Comment ça marche ?
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Trois étapes simples pour automatiser complètement votre boîte mail
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {steps.map((step, index) => (
+              <div key={index} className="text-center relative">
+                <div className="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">
+                  {step.number}
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">{step.title}</h3>
+                <p className="text-gray-600">{step.description}</p>
+                {index < steps.length - 1 && (
+                  <ArrowRight className="w-8 h-8 text-gray-400 absolute -right-4 top-8 hidden md:block" />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section id="pricing" className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Tarifs transparents
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Choisissez le plan qui correspond à vos besoins. Changez ou annulez à tout moment.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {plans.map((plan, index) => (
+              <div key={index} className={`bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow relative ${plan.popular ? 'ring-2 ring-blue-600' : ''}`}>
+                {plan.popular && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                    <span className="bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                      Populaire
+                    </span>
+                  </div>
+                )}
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-semibold text-gray-900 mb-2">{plan.name}</h3>
+                  <div className="text-4xl font-bold text-gray-900 mb-2">
+                    {plan.price}
+                    <span className="text-lg font-normal text-gray-600">{plan.period}</span>
+                  </div>
+                  <p className="text-gray-600">{plan.description}</p>
+                </div>
+                <ul className="space-y-3 mb-8">
+                  {plan.features.map((feature, i) => (
+                    <li key={i} className="flex items-center text-gray-700">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <button 
+                  onClick={() => handlePricingClick(plan.name)}
+                  className={`w-full py-3 rounded-lg font-semibold transition-colors ${plan.popular ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-gray-100 text-gray-900 hover:bg-gray-200'}`}
+                >
+                  {plan.name === 'Sur-mesure' ? 'Nous contacter' : 'Commencer'}
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Ils nous font confiance
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Découvrez comment nos clients transforment leur productivité
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <div key={index} className="bg-gray-50 p-8 rounded-lg">
+                <div className="flex mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                  ))}
+                </div>
+                <p className="text-gray-700 mb-6 italic">"{testimonial.content}"</p>
+                <div>
+                  <div className="font-semibold text-gray-900">{testimonial.name}</div>
+                  <div className="text-gray-600">{testimonial.role}</div>
+                  <div className="text-gray-500 text-sm">{testimonial.company}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section id="faq" className="py-20 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Questions fréquentes
+            </h2>
+            <p className="text-xl text-gray-600">
+              Tout ce que vous devez savoir sur notre plateforme
+            </p>
+          </div>
+
+          <div className="space-y-8">
+            {faqs.map((faq, index) => (
+              <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
+                <p className="text-gray-600">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA Section */}
+      <section className="py-20 bg-blue-600">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            Prêt à reprendre le contrôle de votre boîte mail ?
+          </h2>
+          <p className="text-xl text-blue-100 mb-8">
+            Rejoignez des milliers d'utilisateurs qui ont déjà transformé leur productivité
+          </p>
+          <button 
+            onClick={handleStartTrial}
+            className="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors"
+          >
+            Commencer gratuitement
+          </button>
+          <p className="text-blue-100 mt-4">14 jours d'essai • Aucune carte bancaire requise</p>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+              <div className="flex items-center space-x-2 mb-4">
+                <Mail className="w-8 h-8 text-blue-400" />
+                <span className="text-2xl font-bold">MailBot</span>
+              </div>
+              <p className="text-gray-400">
+                Automatisez votre boîte mail avec l'intelligence artificielle
+              </p>
+            </div>
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Produit</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#" className="hover:text-white transition-colors">Fonctionnalités</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Tarifs</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Sécurité</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Support</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#" className="hover:text-white transition-colors">Documentation</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">FAQ</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Entreprise</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#" className="hover:text-white transition-colors">À propos</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Carrières</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Presse</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+            <p>&copy; 2024 MailBot. Tous droits réservés.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default LandingPage;
